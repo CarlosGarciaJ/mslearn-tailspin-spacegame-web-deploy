@@ -104,7 +104,7 @@ stages:
               package: '$(Pipeline.Workspace)/drop/$(buildConfiguration)/*.zip'
 
 - stage: 'Test'
-  displayName: 'Deploy to the test env'
+  displayName: 'Deploy to the test environment'
   dependsOn: Dev
   #condition: eq(variables['Build.Reason'], 'Schedule')
   jobs:
@@ -118,9 +118,9 @@ stages:
       runOnce:
         deploy:
           steps:
-            - download: current
-              artifact: drop
-            - task: AzureWebApp@1
+          - download: current
+            artifact: drop
+          - task: AzureWebApp@1
             displayName: 'Azure App Service Deploy: website'
             inputs:
               azureSubscription: 'Resource Manager - Tailspin - Space Game'
